@@ -1,7 +1,7 @@
-from tkinter import *
+import tkinter as tk
 from tkinter import filedialog
 
-class Application(Frame):
+class Application(tk.Frame):
     """file path load"""
 
     def __init__(self, master = None):
@@ -10,16 +10,21 @@ class Application(Frame):
         self.pack()
 
         self.pathfinder()
+        self.pathtext()
     
     def pathfinder(self):
-        self.button_pathload = Button(self)
+        self.button_pathload = tk.Button(self)
         self.button_pathload["text"] = "选择文件"
-        self.button_pathload.pack()
+        self.button_pathload.pack(side='left')
         self.button_pathload["command"] = self.pathload 
     def pathload(self):         
-        filedialog.askdirectory()
+        var = filedialog.askopenfilename()
+        self.text_path.insert('insert',var) 
+    def pathtext(self):
+        self.text_path = tk.Entry(self)
+        self.text_path.pack(side='right')
 
-root = Tk()
+root = tk.Tk()
 root.title('my first GUI program')
 root.geometry('1500x1000+500+300')
 
